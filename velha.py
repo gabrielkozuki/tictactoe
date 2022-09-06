@@ -1,3 +1,6 @@
+from re import S
+
+
 class Velha():
     
     def __init__(self):
@@ -7,7 +10,10 @@ class Velha():
             [0, 0, 0]
         ]
         self.rodada = 0
-        self.vez = 0
+        self.vez = 1
+        
+    def getPos(self, row, col):
+        return self.tab[row][col]
         
     def getVez(self):
         return self.vez
@@ -15,12 +21,13 @@ class Velha():
     def getRodada(self):
         return self.rodada
         
-    def setJogada(self, jogador, row, col):
+    def setJogada(self, row, col):
         if self.tab[row][col] != 0:
             return None
         else:
-            self.tab[row][col] = jogador
-            return jogador
+            self.tab[row][col] = self.vez
+            print(self.vez)
+            return self.vez
         
     def verificarGanhador(self, jogador):
         
@@ -44,10 +51,14 @@ class Velha():
             return None
         
     def jogarRodada(self, row, col):
-        self.vez = rodada % 2
-        rodada = rodada + 1
+        if self.vez == 1:
+            self.vez = 2
+        elif self.vez == 2:
+            self.vez == 1
         
-        return self.setJogada(self.vez, row, col)
+        self.rodada = self.rodada + 1
+        
+        return self.setJogada(row, col)
     
     
         

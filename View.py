@@ -1,4 +1,5 @@
 import tkinter as tk
+from functools import partial
 
 def donothing():
     pass
@@ -11,8 +12,6 @@ class View():
         self.container.grid(row=0, column=0)
         
         self.controller = controller
-        self.jogador1 = "X"
-        self.jogador2 = "O"
         
         self.nomeJogador1 = tk.StringVar()
         self.nomeJogador2 = tk.StringVar()
@@ -27,25 +26,25 @@ class View():
         frame = tk.Frame(self.container)
         frame.grid(row=1, column=0, padx=5, pady=5)
         
-        self.btn11 = tk.Button(frame, text="", width=10, height=5, command=donothing)
-        self.btn12 = tk.Button(frame, text="", width=10, height=5, command=donothing)
-        self.btn13 = tk.Button(frame, text="", width=10, height=5, command=donothing)
-        self.btn21 = tk.Button(frame, text="", width=10, height=5, command=donothing)
-        self.btn22 = tk.Button(frame, text="", width=10, height=5, command=donothing)
-        self.btn23 = tk.Button(frame, text="", width=10, height=5, command=donothing)
-        self.btn31 = tk.Button(frame, text="", width=10, height=5, command=donothing)
-        self.btn32 = tk.Button(frame, text="", width=10, height=5, command=donothing)
-        self.btn33 = tk.Button(frame, text="", width=10, height=5, command=donothing)
+        self.btn00 = tk.Button(frame, textvariable=self.controller.tabuleiro[0][0], width=10, height=5, state="disabled", command=partial(self.controller.jogarRodada, 0, 0))
+        self.btn01 = tk.Button(frame, textvariable=self.controller.tabuleiro[0][1], width=10, height=5, state="disabled", command=partial(self.controller.jogarRodada, 0, 1))
+        self.btn02 = tk.Button(frame, textvariable=self.controller.tabuleiro[0][2], width=10, height=5, state="disabled", command=partial(self.controller.jogarRodada, 0, 2))
+        self.btn10 = tk.Button(frame, textvariable=self.controller.tabuleiro[1][0], width=10, height=5, state="disabled", command=partial(self.controller.jogarRodada, 1, 0))
+        self.btn11 = tk.Button(frame, textvariable=self.controller.tabuleiro[1][1], width=10, height=5, state="disabled", command=partial(self.controller.jogarRodada, 1, 1))
+        self.btn12 = tk.Button(frame, textvariable=self.controller.tabuleiro[1][2], width=10, height=5, state="disabled", command=partial(self.controller.jogarRodada, 1, 2))
+        self.btn20 = tk.Button(frame, textvariable=self.controller.tabuleiro[2][0], width=10, height=5, state="disabled", command=partial(self.controller.jogarRodada, 2, 0))
+        self.btn21 = tk.Button(frame, textvariable=self.controller.tabuleiro[2][1], width=10, height=5, state="disabled", command=partial(self.controller.jogarRodada, 2, 1))
+        self.btn22 = tk.Button(frame, textvariable=self.controller.tabuleiro[2][2], width=10, height=5, state="disabled", command=partial(self.controller.jogarRodada, 2, 2))
         
-        self.btn11.grid(row=1, column=1, padx=5, pady=5)
-        self.btn12.grid(row=1, column=2, padx=5, pady=5)
-        self.btn13.grid(row=1, column=3, padx=5, pady=5)
-        self.btn21.grid(row=2, column=1, padx=5, pady=5)
-        self.btn22.grid(row=2, column=2, padx=5, pady=5)
-        self.btn23.grid(row=2, column=3, padx=5, pady=5)
-        self.btn31.grid(row=3, column=1, padx=5, pady=5)
-        self.btn32.grid(row=3, column=2, padx=5, pady=5)
-        self.btn33.grid(row=3, column=3, padx=5, pady=5)
+        self.btn00.grid(row=1, column=1, padx=5, pady=5)
+        self.btn01.grid(row=1, column=2, padx=5, pady=5)
+        self.btn02.grid(row=1, column=3, padx=5, pady=5)
+        self.btn10.grid(row=2, column=1, padx=5, pady=5)
+        self.btn11.grid(row=2, column=2, padx=5, pady=5)
+        self.btn12.grid(row=2, column=3, padx=5, pady=5)
+        self.btn20.grid(row=3, column=1, padx=5, pady=5)
+        self.btn21.grid(row=3, column=2, padx=5, pady=5)
+        self.btn22.grid(row=3, column=3, padx=5, pady=5)
         
     def inserirMenu(self):
         frame = tk.Frame(self.container)
@@ -73,8 +72,31 @@ class View():
         self.labelJogador2.configure(fg="#000")
         self.labelTurno.configure(fg="#000")
         
+        self.btn00["state"] = tk.NORMAL
+        self.btn01["state"] = tk.NORMAL
+        self.btn02["state"] = tk.NORMAL
+        self.btn10["state"] = tk.NORMAL
+        self.btn11["state"] = tk.NORMAL
+        self.btn12["state"] = tk.NORMAL
+        self.btn20["state"] = tk.NORMAL
+        self.btn21["state"] = tk.NORMAL
+        self.btn22["state"] = tk.NORMAL
+
+        
     def pararJogo(self):
         self.labelRodada.configure(fg="#BFBFBF")
         self.labelJogador1.configure(fg="#BFBFBF")
         self.labelJogador2.configure(fg="#BFBFBF")
         self.labelTurno.configure(fg="#BFBFBF")
+        
+        self.btn00["state"] = tk.DISABLED
+        self.btn01["state"] = tk.DISABLED
+        self.btn02["state"] = tk.DISABLED
+        self.btn10["state"] = tk.DISABLED
+        self.btn11["state"] = tk.DISABLED
+        self.btn12["state"] = tk.DISABLED
+        self.btn20["state"] = tk.DISABLED
+        self.btn21["state"] = tk.DISABLED
+        self.btn22["state"] = tk.DISABLED
+        
+    
