@@ -13,6 +13,9 @@ class View():
         self.controller = controller
         self.jogador1 = "X"
         self.jogador2 = "O"
+        
+        self.nomeJogador1 = tk.StringVar()
+        self.nomeJogador2 = tk.StringVar()
 
         self.inserirTabuleiro()
         self.inserirMenu()
@@ -48,35 +51,30 @@ class View():
         frame = tk.Frame(self.container)
         frame.grid(row=2, column=0, padx=5, pady=5)
         
-        self.labelPlacar = tk.Label(frame, width=20, text="Pontuação:", fg="#BFBFBF")
-        self.labelP1 = tk.Label(frame, width=20, text="Jogador 1 (X): ", fg="#BFBFBF")
-        self.labelP2 = tk.Label(frame, width=20, text="Jogador 2 (O): ", fg="#BFBFBF")
-        self.labelTurno = tk.Label(frame, width=20, text="Vez de:", fg="#BFBFBF")
         self.labelRodada = tk.Label(frame, width=20, text="Rodada:", fg="#BFBFBF")
-        btnIniciar = tk.Button(frame, text="Iniciar jogo", width=10, command=self.iniciarJogo)
-        self.inputJogador1 = tk.Entry(frame, width=20, textvariable=self.jogador1)
-        self.inputJogador2 = tk.Entry(frame, width=20, textvariable=self.jogador2)
+        self.labelJogador1 = tk.Label(frame, width=20, text="Jogador 1 (X): ", fg="#BFBFBF")
+        self.labelJogador2 = tk.Label(frame, width=20, text="Jogador 2 (O): ", fg="#BFBFBF")
+        self.labelTurno = tk.Label(frame, width=20, text="Vez de:", fg="#BFBFBF")
+        self.btnJogo = tk.Button(frame, text="Iniciar jogo", width=10, command=self.controller.setJogo)
+        self.inputJogador1 = tk.Entry(frame, width=20, textvariable=self.nomeJogador1)
+        self.inputJogador2 = tk.Entry(frame, width=20, textvariable=self.nomeJogador2)
         
-        self.labelPlacar.grid(row=1, column=0, pady=2)
-        self.labelP1.grid(row=1, column=1, pady=2)
-        self.labelP2.grid(row=1, column=2, pady=2)
+        self.labelRodada.grid(row=1, column=0, pady=2)
+        self.labelJogador1.grid(row=2, column=1, pady=2)
+        self.labelJogador2.grid(row=2, column=2, pady=2)
         self.labelTurno.grid(row=2, column=0, pady=2)
-        self.labelRodada.grid(row=2, column=1, pady=2)
-        btnIniciar.grid(row=3, column=0, pady=6)
+        self.btnJogo.grid(row=3, column=0, pady=6)
         self.inputJogador1.grid(row=3, column=1, pady=6)
-        self.inputJogador1.grid(row=3, column=2, pady=6)
+        self.inputJogador2.grid(row=3, column=2, pady=6)
     
-    def criarPopup(self, msg, type):
-        pass
-        
     def iniciarJogo(self):
-        self.labelPlacar.configure(fg="#000")
-        self.labelP1.configure(fg="#000")
-        self.labelP2.configure(fg="#000")
-        self.labelTurno.configure(fg="#000")
         self.labelRodada.configure(fg="#000")
+        self.labelJogador1.configure(fg="#000")
+        self.labelJogador2.configure(fg="#000")
+        self.labelTurno.configure(fg="#000")
         
-        self.atualizarTabuleiro()
-        
-    def atualizarTabuleiro():
-        pass
+    def pararJogo(self):
+        self.labelRodada.configure(fg="#BFBFBF")
+        self.labelJogador1.configure(fg="#BFBFBF")
+        self.labelJogador2.configure(fg="#BFBFBF")
+        self.labelTurno.configure(fg="#BFBFBF")
